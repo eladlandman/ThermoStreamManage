@@ -10,11 +10,11 @@ using System.Threading;
 
 namespace manageDevice
 {
-  public class ControlDevice
+    public class ControlDevice
     {
 
-       private SerialPort _serialPort { get; set; }
- 
+        private SerialPort _serialPort { get; set; }
+
         public ControlDevice()
         {
             _serialPort = new SerialPort("COM4");
@@ -29,7 +29,7 @@ namespace manageDevice
             return _serialPort.IsOpen;
         }
 
-        private  bool SetOperationFunc(String command)
+        private bool SetOperationFunc(String command)
         {
             if (!(_serialPort.IsOpen))
             {
@@ -70,8 +70,47 @@ namespace manageDevice
             return result;
         }
 
+        public void TurnOnFlow()
+        {
+            String command = "FLOW 1";
+            SetOperationFunc(command);
+        }
 
-        
+        public void TurnOffFlow()
+        {
+            String command = "FLOW 0";
+            SetOperationFunc(command);
+        }
+
+        public void SetDesiredAirFlowRate(float _rate)
+        {
+            if (_rate >= 5 && _rate <= 18)
+            {
+                String rate = _rate.ToString();
+                String command = "FLUE" + " rate";
+                SetOperationFunc(command);
+            }
+            else
+            {
+                Console.WriteLine("you gave rate not in expected range");
+            }
+        }
+
+        public float GetDesiredAirFlowRate()
+        {
+
+            String command = "FLWM ?";
+            return GetOperationFunc(command);
+        }
+
+
+        public float GetMeasuredAirFlowRate()
+        {
+            String command = "FLWR ?";
+            return GetOperationFunc(command);
+        }
+
+
 
         public float GetMainAirTemperatureFromDevice()
         {
@@ -94,8 +133,6 @@ namespace manageDevice
         {
             return GetOperationFunc("FLSE?");
         }
-
-
 
 
 
@@ -125,14 +162,13 @@ namespace manageDevice
             SetOperationFunc(command);
         }
 
+
         public void SetLowTemperatureValue(float lowlimit)
         {
             String _lowTemp = lowlimit.ToString();
             String command = "LLIM" + _lowTemp;
             SetOperationFunc(command);
         }
-
-
 
 
 

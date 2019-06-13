@@ -11,6 +11,7 @@ namespace manageDevice
     {
         static void Main(string[] args)
         {
+            
             ControlDevice myDevice = new ControlDevice();
             myDevice.ConnectToDevice();
             float _temp = myDevice.GetMainAirTemperatureFromDevice();
