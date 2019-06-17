@@ -14,8 +14,11 @@ namespace manageDevice
             
             ControlDevice myDevice = new ControlDevice();
             myDevice.ConnectToDevice();
-            float _temp = myDevice.GetMainAirTemperatureFromDevice();
-            myDevice.SetTemperatueForDevice(20, 30, 25);
+            myDevice.TurnOnFlow();
+            myDevice.SetAirFlowLimitValues(10, 25);
+            myDevice.SetDesiredAirFlowRate(18);
+            float _temp = myDevice.GetDesiredAirFlowRate();
+            myDevice.TurnOffFlow();
             Console.ReadLine();
         }
     }

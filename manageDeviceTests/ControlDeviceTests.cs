@@ -26,63 +26,67 @@ namespace manageDevice.Tests
 
 
         [TestMethod()]
-        public void GetMainAirTemperatureFromDeviceTest()
+        public void GetLimitsAirTemperatureFromDeviceTest()
         {
             ControlDevice device = new ControlDevice();
             device.ConnectToDevice();
-            device.SetTemperatueForDevice(10, 30, 20);
-            float setPointTemperature = device.GetSetPointTemperature();
-            Assert.AreEqual(setPointTemperature, 20);
+            device.SetAirFlowLimitValues(10, 25);
             float lowLimitTemperature = device.GetLowAirTemperatureLimit();
             Assert.AreEqual(lowLimitTemperature, 10);
             float highLimitTemperature = device.GetHighAirTemperatureLimit();
-            Assert.AreEqual(highLimitTemperature, 30);
-
+            Assert.AreEqual(highLimitTemperature, 25);
         }
 
+      
         [TestMethod()]
-        public void GetLowAirTemperatureLimitTest()
+        public void GetLimitsAirFlowRateInLitersTest()
         {
             ControlDevice device = new ControlDevice();
             device.ConnectToDevice();
-            device.SetLowTemperatureValue(12);
-            float lowTemp = device.GetLowAirTemperatureLimit();
-            Assert.AreEqual(lowTemp, 12);
-
+            device.TurnOnFlow();
+            device.SetAirFlowLimitValues(3, 10);
+            float airFlowRateLowerLimit = device.GetLowAirFlowRateLimit();
+            float airFlowRateHigherLimit = device.GetHighAirFlowRateLimit();
+            device.TurnOffFlow();
+            Assert.AreEqual(airFlowRateLowerLimit, 3);
+            Assert.AreEqual(airFlowRateHigherLimit, 10);
         }
 
         [TestMethod()]
-        public void GetAirFlowRateInLitersTest()
+        public void GetMainTemperatueForDeviceTest()
         {
             ControlDevice device = new ControlDevice();
             device.ConnectToDevice();
-            device.SetAirFlowValues(10, 30, 40);
-            float airFlowRate = device.GetAirFlowRate();
-            Assert.AreEqual(airFlowRate, 40);
-        }
-
-        [TestMethod()]
-        public void SetTemperatueForDeviceTest()
-        {
-            Assert.Fail();
+            float currentTemp = device.GetMainAirTemperatureFromDevice();
+            Assert.IsTrue(currentTemp >= device.GetLowAirTemperatureLimit());
+            Assert.IsTrue(currentTemp <= device.GetHighAirTemperatureLimit());   
         }
 
         [TestMethod()]
         public void SetAirFlowValuesTest()
         {
-            Assert.Fail();
+            ControlDevice device = new ControlDevice();
+            device.ConnectToDevice();
+            device.TurnOnFlow();
+            device.SetDesiredAirFlowRate(20);
+            float desiret_temp = device.GetDesiredAirFlowRate();
+            Assert.AreEqual(desiret_temp, 20);
         }
 
         [TestMethod()]
         public void GetPowerFromDeviceTest()
         {
-            Assert.Fail();
+
+
+           
         }
 
         [TestMethod()]
         public void SetPowerToDeviceTest()
         {
-            Assert.Fail();
+
+
+            
         }
     }
 }
