@@ -37,6 +37,45 @@ namespace manageDevice.Tests
         }
 
 
+       
+       
+        [TestMethod()]
+        public void GetMainTemperatueForDeviceTest()
+        {
+            ControlDevice device = new ControlDevice();
+            device.ConnectToDevice();
+            device.SetTemperatueLimitsForDevice(10, 28);
+            float currentTemp = device.GetMainAirTemperatureFromDevice();
+            Assert.IsTrue(currentTemp >= 10 && currentTemp <= 28);
+            device.DisConnectFromDevice();
+        }
+
+
+
+        [TestMethod()]
+        public void TurnOnFlowTest()
+        {
+            ControlDevice device = new ControlDevice();
+            device.ConnectToDevice();
+            device.TurnOnFlow();
+        }
+
+
+
+
+        [TestMethod()]
+        public void TurnOffFlowTest()
+        {
+            ControlDevice device = new ControlDevice();
+            device.ConnectToDevice();
+            device.TurnOnFlow();
+            device.TurnOffFlow();
+            
+        }
+
+
+
+        /* might be not supported by 505 manual
         [TestMethod()]
         public void GetLimitsAirFlowRateInLitersTest()
         {
@@ -49,38 +88,21 @@ namespace manageDevice.Tests
             Assert.AreEqual(airFlowRateHigherLimit, 5);
             device.DisConnectFromDevice();
         }
+        */
 
-
-
-
-        [TestMethod()]
-        public void GetMainTemperatueForDeviceTest()
-        {
-            ControlDevice device = new ControlDevice();
-            device.ConnectToDevice();
-            device.SetTemperatueLimitsForDevice(10, 26);
-            float currentTemp = device.GetMainAirTemperatureFromDevice();
-            Assert.IsTrue(currentTemp >= 10 && currentTemp<=26);
-            device.DisConnectFromDevice();
-            
-        }
-
-
-
-
-        [TestMethod()]
-        public void SetAirFlowValuesTest()
-        {
-            ControlDevice device = new ControlDevice();
-            device.ConnectToDevice();
-            device.SetAirFlowLimitValues(3, 10);
-            device.SetDesiredAirFlowRate(8);
-            float desiret_temp = device.GetDesiredAirFlowRate();
-            Assert.AreEqual(desiret_temp, 8);
-            device.DisConnectFromDevice();
-        }
-
-
+        /* might be not supported by 505 manual
+    [TestMethod()]
+    public void SetAirFlowValuesTest()
+    {
+        ControlDevice device = new ControlDevice();
+        device.ConnectToDevice();
+        device.SetAirFlowLimitValues(3, 10);
+        device.SetDesiredAirFlowRate(8);
+        float desiret_temp = device.GetDesiredAirFlowRate();
+        Assert.AreEqual(desiret_temp, 8);
+        device.DisConnectFromDevice();
+    }
+    */
 
         /*
 

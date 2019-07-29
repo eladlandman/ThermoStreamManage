@@ -17,53 +17,54 @@ namespace manageDevice
         {
             ControlDevice myDevice = new ControlDevice();
             myDevice.ConnectToDevice();
-            myDevice.SetTemperatueLimitsForDevice(2, 29);
+            myDevice.SetTemperatueLimitsForDevice(13, 29);
             float lower_limit = myDevice.GetLowAirTemperatureLimit();
             float higher_limit = myDevice.GetHighAirTemperatureLimit();
             float current_temp = myDevice.GetMainAirTemperatureFromDevice();
             Console.WriteLine($"low limit of temperature is :{lower_limit}");
             Console.WriteLine($"high limit of temperature is :{higher_limit}");
             Console.WriteLine($"main air temperature is : {current_temp}");
-            myDevice.TurnOffFlow();
             myDevice.DisConnectFromDevice();
         }
 
 
 
-
-
-
-        /*checking airflow setting limits
-        public void TermoStreamSecondTest()
+        public static void TurnOnFlowTest()
         {
             ControlDevice myDevice = new ControlDevice();
             myDevice.ConnectToDevice();
             myDevice.TurnOnFlow();
-            myDevice.SetAirFlowLimitValues(10, 25);
-            myDevice.SetDesiredAirFlowRate(18);
-            float _temp = myDevice.GetDesiredAirFlowRate();
-            Console.WriteLine($"the desired temperature we got is: {_temp}");
-            myDevice.TurnOffFlow();
+        }
+
+
+
+        public static float GetSelectesSetPointTempTest()
+        {
+            ControlDevice myDevice = new ControlDevice();
+            myDevice.ConnectToDevice();
+            myDevice.SetTemperatueLimitsForDevice(15, 28);
+            myDevice.SetSelectedSetPointTemperature(22);
+            float result = myDevice.GetCurrentSetPointTemperature();
             myDevice.DisConnectFromDevice();
+            return result;
 
         }
 
 
-    */
-
-    
-
-     
-    
+        public static void ShowSelectedTempTest()
+        {
+            Console.WriteLine($"selected set temperature is : {GetSelectesSetPointTempTest()}");
+        }
 
 
 
 
 
-
+        
         static void Main(string[] args)
         {
             TermoStreamFirstTest();
+            ShowSelectedTempTest();
             Console.ReadLine();
         }
     }

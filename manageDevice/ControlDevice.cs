@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,7 @@ namespace manageDevice
         {
             String command = "FLOW 1";
             SetOperationFunc(command);
+            
         }
 
 
@@ -54,6 +56,8 @@ namespace manageDevice
             String command = "FLOW 0";
             SetOperationFunc(command);
         }
+
+
 
 
         private bool SetOperationFunc(String command)
@@ -75,6 +79,7 @@ namespace manageDevice
             }
             return false;
         }
+
 
 
 
@@ -101,72 +106,9 @@ namespace manageDevice
         }
 
 
-
-
-
-        public void SetAirFlowLimitValues(float lowlimit, float highlimit)
-        {
-            if (lowlimit >= 1 && lowlimit <= 5 && highlimit >= 5 && highlimit <= 20)
-            {
-                String _lowtemp = lowlimit.ToString(), _hightemp = highlimit.ToString();
-                string command = "FLLE " + _lowtemp + ";FLUE " + _hightemp;
-                SetOperationFunc(command);
-            }
-            else
-            {
-                Console.WriteLine("You gave parameters out of expected range");
-            }
-        }
-
-
-
-        public void SetDesiredAirFlowRate(float _rate)
-        {
-            if (_rate >= 5 && _rate <= 18)
-            {
-                String rate = _rate.ToString();
-                String command = "FLSE " + _rate;
-                SetOperationFunc(command);
-            }
-            else
-            {
-                Console.WriteLine("you gave rate not in expected range");
-            }
-        }
-
-
-        
-
-        public float GetDesiredAirFlowRate()
-        {
-            String command = "FLSE?";
-            return GetOperationFunc(command);
-        }
-
-
-        public float GetMeasuredAirFlowRate()
-        {
-            String command = "FLWR?";
-            return GetOperationFunc(command);
-        }
-
-
-        public float GetLowAirFlowRateLimit()
-        {
-            return GetOperationFunc("FLLE?");
-        }
-
-
-        public float GetHighAirFlowRateLimit()
-        {
-            return GetOperationFunc("FLUE?");
-        }
-
-
-
         public void SetTemperatueLimitsForDevice(float lowtemp, float hightemp)
         {
-            if (lowtemp >= -150 && lowtemp <= 25 && hightemp >= 25 && hightemp <= 225)
+            if (lowtemp >= -99 && lowtemp <= 25 && hightemp >= 25 && hightemp <= 225)
             {
                 String _lowtemp = lowtemp.ToString(), _hightemp = hightemp.ToString();
                 string command = "LLIM " + _lowtemp + ";ULIM " + _hightemp;
@@ -178,14 +120,14 @@ namespace manageDevice
             }
         }
 
-
-
+        
+        /*setPointTemperature method*/
         public void SetSelectedSetPointTemperature(float _rate)
         {
             if (_rate >= -99.9 && _rate <= 225 && TempInRange(_rate))
             {
-                String rate = _rate.ToString();
-                String command = "SETP " + _rate;
+                String set_Temp = _rate.ToString();
+                String command = "SETP " + set_Temp;
                 SetOperationFunc(command);
             }
             else
@@ -196,13 +138,15 @@ namespace manageDevice
 
 
 
+
+
         public float GetMainAirTemperatureFromDevice()
         {
             return GetOperationFunc("TEMP?");
         }
 
 
-        public float GetCurrentTemperatureSetPoint()
+        public float GetCurrentSetPointTemperature()
         {
             return GetOperationFunc("SETP?");
         }
@@ -215,7 +159,7 @@ namespace manageDevice
         }
 
 
-        
+
         public float GetHighAirTemperatureLimit()
         {
             return GetOperationFunc("ULIM?");
@@ -234,6 +178,84 @@ namespace manageDevice
         {
             return (temp >= GetLowAirTemperatureLimit() && temp <= GetHighAirTemperatureLimit());
         }
+
+
+
+
+        /*might be not supported by 505 manual
+        public void SetAirFlowLimitValues(float lowlimit, float highlimit)
+        {
+            if (lowlimit >= 1 && lowlimit <= 5 && highlimit >= 5 && highlimit <= 20)
+            {
+                String _lowtemp = lowlimit.ToString(), _hightemp = highlimit.ToString();
+                string command = "FLLE " + _lowtemp + ";FLUE " + _hightemp;
+                SetOperationFunc(command);
+            }
+            else
+            {
+                Console.WriteLine("You gave parameters out of expected range");
+            }
+        }
+        */
+
+
+        /*  might be not supported by 505 manual
+    public void SetDesiredAirFlowRate(float _rate)
+    {
+        if (_rate >= 5 && _rate <= 18)
+        {
+            String rate = _rate.ToString();
+            String command = "FLSE " + _rate;
+            SetOperationFunc(command);
+        }
+        else
+        {
+            Console.WriteLine("you gave rate not in expected range");
+        }
+    }
+
+        */
+
+
+        /*might be not supported by 505 manual
+
+        public float GetDesiredAirFlowRate()
+        {
+            String command = "FLSE?";
+            return GetOperationFunc(command);
+        }
+        */
+
+
+        /*might be not supported by 505 manual
+        public float GetMeasuredAirFlowRate()
+        {
+            String command = "FLWR?";
+            return GetOperationFunc(command);
+        }
+        */
+
+        /*might be not supported by 505 manual
+      public float GetLowAirFlowRateLimit()
+      {
+          return GetOperationFunc("FLLE?");
+      }
+
+         */
+
+        /*might be not supported by 505 manual
+       public float GetHighAirFlowRateLimit()
+       {
+           return GetOperationFunc("FLUE?");
+       }
+
+          */
+
+
+
+
+        /*setPointTemperature method*/
+       
 
 
 
