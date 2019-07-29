@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\manageDevice\manageDevice.csproj">
+    <ProjectReference Include="..\manageDevice\ThermoStreamManage.csproj">
       <Project>{9F3A70A1-F9EC-468B-A224-880229B05C8C}</Project>
-      <Name>manageDevice</Name>
+      <Name>ThermoStreamManage</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

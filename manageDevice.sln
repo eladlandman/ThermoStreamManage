@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "manageDevice", "manageDevice\manageDevice.csproj", "{9F3A70A1-F9EC-468B-A224-880229B05C8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThermoStreamManage", "manageDevice\ThermoStreamManage.csproj", "{9F3A70A1-F9EC-468B-A224-880229B05C8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "manageDeviceTests", "manageDeviceTests\manageDeviceTests.csproj", "{0487AE78-C9C7-4EDF-B315-C03148603812}"
 EndProject
